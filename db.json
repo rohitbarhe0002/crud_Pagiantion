@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "name": "Leanne Heev",
+      "email": "r@",
+      "phone": "74158649900000",
+      "id": 18
+    },
+    {
+      "name": "Leanne Hee",
+      "email": "nilson@email.com",
+      "phone": "19999",
+      "id": 20
+    },
+    {
+      "name": "rohitbarche0002",
+      "email": "nilson@email.com",
+      "phone": "1111111",
+      "id": 21
+    },
+    {
+      "name": "Leanne Hee",
+      "email": "rohitbarche99@gmail.com",
+      "phone": "1-770-736-8031 x56442",
+      "id": 22
+    }
+  ],
+  "todos": [],
+  "photos": [],
+  "albums": [],
+  "comments": [],
+  "posts": []
+}

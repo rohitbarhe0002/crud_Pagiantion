@@ -12,8 +12,11 @@ export  const  paginations = (state=initialState,action) => {
         case SET_PAGE:
             return{
                 ...state,
-                filters : action.payload,
+                filters :{
+                    ...state.filters,
+                    ...action.payload,
             }
+        }
     
         default:
             return state;

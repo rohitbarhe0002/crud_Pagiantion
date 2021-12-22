@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "name": "Leanne Heev",
-      "email": "r@",
-      "phone": "74158649900000",
-      "id": 18
-    },
-    {
       "name": "Leanne Hee",
       "email": "nilson@email.com",
       "phone": "19999",
@@ -23,6 +17,12 @@
       "email": "rohitbarche99@gmail.com",
       "phone": "1-770-736-8031 x56442",
       "id": 22
+    },
+    {
+      "name": "lokesh",
+      "email": "lokesh41@gmail.com",
+      "phone": "55555",
+      "id": 23
     }
   ],
   "todos": [],

@@ -5,10 +5,13 @@
       baseURL:  'http://localhost:3008',
   })
 
-  export const requestUser = () => async (dispatch) =>{
-
+  export const requestUser = (prevfilters) => async (dispatch) =>{
+const params={
+    _limit:prevfilters.limit,
+    _page:prevfilters.page
+}
     try{
-        const response = await client.get('/users');
+        const response = await client.get('/users',{params});
         dispatch(getuser(response.data));
     }catch(err){
         console.log(err);

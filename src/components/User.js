@@ -36,23 +36,33 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { pagination } from '../actions';
 import { requestdelete, requestUser } from '../thunk/request'
 
 
 export default function User() {
-    const user = useSelector(state => state.getusers.user)
-    const {filters}=useSelector(state=>state.paginations.filters)
+    const user = useSelector((state )=> state.getusers.user)
+    const filters =useSelector((state)=>state.paginations.filters)
 
-    console.log(user);
+    console.log(filters);
     const dispatch = useDispatch()
      
+    const handleChangeFilter = (event) => {
+      const { value, name } = event.target;
+      dispatch(pagination({ [name]: value }));
+    };
+  
+    const handlePageChange = (acc) => {
+      dispatch(pagination({ page: acc + filters.page }));
+    };
     useEffect(() => {
-        dispatch(requestUser())
-    }, [])
+        dispatch(requestUser(filters))
+    }, [filters.page,filters.limit])
 
     const handleDelete = (Id) =>{
         dispatch(requestdelete(Id))
     }
+
     
     
     return (
@@ -68,9 +78,16 @@ export default function User() {
            <Link to={`/Ediuser/${i.id}/:id`}>Edit</Link>
          </>
          ))}
+    <select name="limit" value={filters.limit} onChange={handleChangeFilter}>
+        <option value={1}>1</option> 
+        <option value={2}>2</option>
+        <option value={3}>3</option>
+        <option value={1}>1</option>
+     
+      </select>
+      <button disabled={filters.page === 1} onClick={() => handlePageChange(-1)}>Prev</button>
+      <button disabled={filters.page === filters.pages} onClick={() => handlePageChange(1)}>Next</button>
 
-      <button disabled={filters.page === 1} >Prev</button>
-      <button disabled={filters.page === filters.pages} >Next</button>
         </div>
     )
 }

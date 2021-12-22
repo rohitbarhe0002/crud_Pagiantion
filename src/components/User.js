@@ -37,6 +37,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { pagination } from '../actions';
+import Login from './Login';
 import { requestdelete, requestUser } from '../thunk/request'
 
 
@@ -57,16 +58,37 @@ export default function User() {
     };
     useEffect(() => {
         dispatch(requestUser(filters))
-    }, [filters.page,filters.limit])
+    }, [filters.page,filters.limit,filters.orderBy, filters.order])
 
     const handleDelete = (Id) =>{
-        dispatch(requestdelete(Id))
+
+        dispatch(requestdelete(Id));   
     }
 
-    
+    const handleComplete = (event, todoId) => {
+      dispatch(({ todoId, completed: event.target.checked }));
+    }
+    const handleEdit = (id) =>{
+      <Login Id={id}/>
+   
+    }
     
     return (
         <div>
+          
+
+        <select name="orderBy" value={filters.orderBy} onChange={handleChangeFilter}>
+        <option value={"id"}>id</option>
+        <option value={"name"}>name</option>
+        <option value={"phone"}>phone</option>
+      </select>
+
+
+      <select name="order" value={filters.order} onChange={handleChangeFilter}>
+        <option value={"asc"}>Ascending</option>
+        <option value={"desc"}>Descending</option>
+      </select>
+     
           <h1>users</h1>
          {user.map((i)=>(
              <>
@@ -74,16 +96,28 @@ export default function User() {
            <li>{i.name}</li>
              <li>{i.email}</li>
              <li>{i.phone}</li>
-             <button onClick={()=>handleDelete(i.id)}>delete</button>
+
+            <button onClick={()=>handleDelete(i.id)}>delete</button>
+            <button onClick={()=>handleEdit(i.id)}>edit</button>
+            <label>
+                  complete
+                  <input
+                    type="checkbox"
+                    checked={i.completed}
+                    onClick={(event) =>handleComplete(event, i.id)}
+                  />
+                </label>
            <Link to={`/Ediuser/${i.id}/:id`}>Edit</Link>
+    
          </>
          ))}
+
     <select name="limit" value={filters.limit} onChange={handleChangeFilter}>
         <option value={1}>1</option> 
         <option value={2}>2</option>
         <option value={3}>3</option>
         <option value={1}>1</option>
-     
+
       </select>
       <button disabled={filters.page === 1} onClick={() => handlePageChange(-1)}>Prev</button>
       <button disabled={filters.page === filters.pages} onClick={() => handlePageChange(1)}>Next</button>

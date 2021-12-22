@@ -6,8 +6,8 @@ import { requestadd } from '../thunk/request'
 import { useHistory } from 'react-router'
 
 
-export default function Login() {
-    
+export default function Login(Id) {
+   
     const dispatch = useDispatch();
     const history = useHistory()
     const user = useSelector(state => state.users.userInfo)
@@ -16,14 +16,17 @@ export default function Login() {
 
    const handleChange =(event)=>{
     dispatch(adduser({...user,[event.target.name]:event.target.value}));
+    
+   console.log("i am id",Id)
    }
+
    
    const handleSubmit = (event)=>{
        event.preventDefault();
        dispatch(requestadd(user))
-       history.push('/User')
-
        
+       history.push('/User')
+       window.location.reload()     
    }
     return (
         <div>

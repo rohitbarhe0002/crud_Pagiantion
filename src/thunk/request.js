@@ -8,7 +8,8 @@
   export const requestUser = (prevfilters) => async (dispatch) =>{
 const params={
     _limit:prevfilters.limit,
-    _page:prevfilters.page
+    _page:prevfilters.page,
+    _sort: `${prevfilters.orderBy}:${prevfilters.order}`,
 }
     try{
         const response = await client.get('/users',{params});

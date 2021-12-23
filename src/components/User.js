@@ -39,6 +39,7 @@ import { Link } from 'react-router-dom';
 import { pagination } from '../actions';
 import Login from './Login';
 import { requestdelete, requestUser } from '../thunk/request'
+import Pagination from 'react-bootstrap/Pagination'
 
 
 export default function User() {
@@ -98,7 +99,7 @@ export default function User() {
              <li>{i.phone}</li>
 
             <button onClick={()=>handleDelete(i.id)}>delete</button>
-            <button onClick={()=>handleEdit(i.id)}>edit</button>
+            {/* <button onClick={()=>handleEdit(i.id)}>edit</button> */}
             <label>
                   complete
                   <input
@@ -107,18 +108,18 @@ export default function User() {
                     onClick={(event) =>handleComplete(event, i.id)}
                   />
                 </label>
-           <Link to={`/Ediuser/${i.id}/:id`}>Edit</Link>
+           <Link to={`/AllUser/${i.id}`}>Edit</Link>
     
          </>
          ))}
 
-    <select name="limit" value={filters.limit} onChange={handleChangeFilter}>
+     <select name="limit" value={filters.limit} onChange={handleChangeFilter}>
         <option value={1}>1</option> 
         <option value={2}>2</option>
         <option value={3}>3</option>
         <option value={1}>1</option>
 
-      </select>
+      </select> 
       <button disabled={filters.page === 1} onClick={() => handlePageChange(-1)}>Prev</button>
       <button disabled={filters.page === filters.pages} onClick={() => handlePageChange(1)}>Next</button>
 

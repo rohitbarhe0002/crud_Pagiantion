@@ -14,6 +14,7 @@ console.log("gggggggg",state);
         case SET_PAGE:
             return{
                 ...state,
+                ...action.payload,
                 filters :{
                     ...state.filters,
                     ...action.payload,

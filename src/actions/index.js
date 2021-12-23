@@ -1,5 +1,9 @@
 export const USER = 'USER';
 export const adduser = (payload) => ({type:'USER',payload});
+
+export const EDIT_USER = 'EDIT_USER';
+export const Editusers = (payload) => ({type:'EDIT_USER',payload});
+
 export const GET_USER = 'GET_USER';
 export const getuser = (payload) => ({type:'GET_USER',payload});
 

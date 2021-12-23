@@ -1,5 +1,6 @@
   import axios from 'axios';
-  import { getuser,adduser } from "../actions";
+  import { getuser,Edituser, Editusers } from "../actions";
+ 
 
   const client = axios.create ({
       baseURL:  'http://localhost:3008',
@@ -9,7 +10,8 @@
 const params={
     _limit:prevfilters.limit,
     _page:prevfilters.page,
-    _sort: `${prevfilters.orderBy}:${prevfilters.order}`,
+    _orderBy: `${prevfilters.orderBy}`,
+    _order: `${prevfilters.order}`,
 }
     try{
         const response = await client.get('/users',{params});
@@ -42,7 +44,7 @@ const params={
     
   }
 
-  export const requestedit = (user,id) => async () =>{
+  export const requestedit = (id,user) => async (dispatch) =>{
     try{
          await client.put(`/users/${id}`,user)
         console.log("ghgdhghdh",user);
@@ -53,13 +55,13 @@ const params={
 }
 
 
-// export const requestEdit = (id) => async (dispatch) =>{
-//     try{
-//         const response = await client.get(`/users/${id}`)
-//         dispatch(getuser(response.data));
-        
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// }
+export const requestEdit = (id) => async (dispatch) =>{
+    try{
+        const response = await axios.get(`http://localhost:3008/users/${id}`)
+        dispatch(Editusers(response.data));
+        console.log("thunk",response.data);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
